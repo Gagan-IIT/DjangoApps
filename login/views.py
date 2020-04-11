@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from .models import Login
-from .forms import LoginForm
+from .forms import LoginForm, AddLoginForm
 
 # Create your views here.
 def login_page_view(request):
@@ -31,9 +31,21 @@ def login_page_view(request):
         my_context = {
             'res' : res,
             'form': form,
+            'logins':logins
         }
     else:
         my_context = {
-            'form' :form
+            'form' :form,
+            'logins':logins
         }
     return render(request, 'login/login_page.html', my_context)
+
+def login_add_view(request):
+    #form = AddLoginForm()
+    if request.method=="POST":
+        form = AddLoginForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+    else:
+        form = AddLoginForm()
+    return render(request, 'login/add.html', {'form': form})

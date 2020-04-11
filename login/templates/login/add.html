@@ -1,0 +1,17 @@
+{% extends 'login/base.html' %}
+
+{% block title %}
+    Add login
+    {% endblock %}
+
+    {% block add_button %}<a href="{% url 'login_page' %}" class="top-menu"><span >Login Page</span></a>{% endblock %}
+
+{% block head %} Add Login here... {% endblock %}
+
+{% block content %}
+    <h2>Create new login</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Add</button>
+    </form>
+{% endblock %}
