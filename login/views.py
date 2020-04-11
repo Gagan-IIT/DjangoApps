@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import Login
 from .forms import LoginForm, AddLoginForm
@@ -46,6 +46,7 @@ def login_add_view(request):
         form = AddLoginForm(request.POST)
         if form.is_valid():
             post = form.save()
+        return redirect("login_add")
     else:
         form = AddLoginForm()
     return render(request, 'login/add.html', {'form': form})
